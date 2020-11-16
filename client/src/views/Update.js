@@ -3,13 +3,6 @@ import axios from 'axios';
 import Form from '../components/Form';
 import { navigate } from "@reach/router";
 
-// const Update = (props) => {
-//     const [form, setForm] = useState({
-//         title: `${props._id.title}`,
-//         price: `${props._id.price}`,
-//         description:`${props._id.description}`
-//     })
-
 const Update = (props) => {
     const [form, setForm] = useState({
         title: "",
@@ -19,10 +12,10 @@ const Update = (props) => {
     })
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${props._id}/update`)
+        axios.get(`http://localhost:8000/api/product/${props._id}`)
             .then(res => {
-                console.log(res.data);
-                setForm(res.data.products);
+                console.log(res.data.product);
+                setForm(res.data.product);
                 })
     }, [])
 
@@ -30,23 +23,25 @@ const Update = (props) => {
         e.preventDefault();
         setForm({
             ...form,
-            [e.target.title]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log(form);
-        axios.put(`https://localhost:8000/api/products/${props._id}/update`, form)
+        axios.put(`http://localhost:8000/api/product/${props._id}/update`, form)
             .then(res => console.log(res))
             .then(res => navigate("/"))
     }
 
     return(
         <div>
+        <hr></hr>
             <Form onSubmitHandler={onSubmitHandler} onChangeHandler={onChangeHandler} form={form} />
         </div>
     )
 }
 
 export default Update;
+

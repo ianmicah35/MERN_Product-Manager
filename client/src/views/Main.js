@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Form from '../components/Form';
+import ListComp from '../components/ListComp';
 import axios from 'axios';
 import { navigate } from "@reach/router";
 
@@ -12,14 +14,15 @@ const Main = (props) => {
     })
 
     useEffect(() => {
-        axios.get("https://localhost:8000/api/products")
+        axios.get("http://localhost:8000/api/product")
             .then(res => setProducts(res.data.products))
+            .catch(err=>console.log("Error: ", err))
     }, [])
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log(form);
-            axios.post("https://localhost:8000/api/product/new", form)
+            axios.post("http://localhost:8000/api/product/new", form)
                 .then(res => console.log(res))
                 .then(res => navigate("/"))
         }
@@ -58,8 +61,8 @@ const Main = (props) => {
             <h3>All Products:</h3>
             <ul>
                 {
-                    products.map(function(product, i){
-                        return <li key={i}><a href={`http://localhost:8000/api/product/${product._id}`}>{product.title}</a></li>
+                    products.map((product, i) => {
+                        return <li key={i}><a href={`http://localhost:3000/api/product/${product._id}/detail`}>{product.title}</a> | <a href={"/api/product/" + product._id + "/update"} className="btn btn-info" role="button">Update</a> | <a href={"/api/product/" + product._id + "/delete"} className="btn btn-info" role="button">Delete</a></li>
                     })
                 }
             </ul>
