@@ -9,7 +9,7 @@ const Detail = props => {
         axios.get('http://localhost:8000/api/product/' + _id)
             .then(res => {
                 setProduct(res.data.product);
-                // console.log(res.data);
+                console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
@@ -22,6 +22,8 @@ const Detail = props => {
             <h6>Title: {product.title}</h6>
             <h6>Price: {product.price}</h6>
             <h6>Description: {product.description}</h6>
+            <br></br>
+            <a href="http://localhost:3000/">Home</a> | <a href={`http://localhost:3000/product/${props._id}/delete`}>Delete</a>
         </div>
     )
 }

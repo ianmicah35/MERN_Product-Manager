@@ -16,10 +16,21 @@
 import React from 'react';
 
 export default props => {
+
+    // const { removeFromDom } = props;
+    // const deleteProduct = (productId) => {
+    //     axios.delete("http://localhost:8000/api/product/:_id/delete")
+    //         .then(res => {
+    //             removeFromDom(productId)
+    //         })
+    // }
+
     return(
         <div>
             {props.products.map((product, i) => {
                 return <p key={i}>{product.title}</p>
+
+                {/* <button onClick={(e)=>{deleteProduct(product._id)}}>Delete</button></p> */}
             })}
         </div>
     )

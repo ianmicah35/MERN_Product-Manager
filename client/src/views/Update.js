@@ -39,6 +39,8 @@ const Update = (props) => {
         <div>
         <hr></hr>
             <Form onSubmitHandler={onSubmitHandler} onChangeHandler={onChangeHandler} form={form} />
+
+            <a href="http://localhost:3000/">Home</a> | <a href={`http://localhost:3000/product/${props._id}/delete`}>Delete</a>
         </div>
     )
 }
